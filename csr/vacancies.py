@@ -17,10 +17,11 @@ class Vacancies:
 
 
 class Vacancies_hh(Vacancies):
-    def __init__(self, url: str, platform: str, pay: float = 0, knowledge_stack: str = ""):
+    def __init__(self, url: str, platform: str, city: str, pay: dict = None, knowledge_stack: str = ""):
         super().__init__(url, platform)
-        self.__pay = pay
-        self.__knowledge_stack = knowledge_stack
+        self.__pay = f'От {pay["from"]}' if isinstance(pay, dict) else "Не указана"
+        self.__knowledge_stack = knowledge_stack if isinstance(knowledge_stack, str) else "Не указано"
+        self.__city = city
 
     def __repr__(self):
         return f"{self.platform}: {self.url} : {self.__pay}"
@@ -32,3 +33,7 @@ class Vacancies_hh(Vacancies):
     @property
     def knowledge_stack(self):
         return self.__knowledge_stack
+
+    @property
+    def city(self):
+        return self.__city
